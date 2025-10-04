@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  
+  <!-- Página Principal -->
+  <url>
+    <loc>https://pescados-e-mariscos.vercel.app/</loc>
+    <lastmod>2024-01-15</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+  </url>
+  
+  <!-- Página de Produtos -->
+  <url>
+    <loc>https://pescados-e-mariscos.vercel.app/Assets/Links/produtos/produtos.html</loc>
+    <lastmod>2024-01-15</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  
+  <!-- Página Sobre -->
+  <url>
+    <loc>https://pescados-e-mariscos.vercel.app/Assets/Links/sobre/sobre.html</loc>
+    <lastmod>2024-01-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+</urlset>

@@ -1,0 +1,29 @@
+﻿User-agent: *
+Allow: /
+Allow: /Assets/
+Allow: /Assets/Css/
+Allow: /Assets/Images/
+Allow: /Assets/Images/Produtos/
+Allow: /Assets/JS/
+Allow: /Assets/Links/
+Allow: /Assets/Links/produtos/
+Allow: /Assets/Links/sobre/
+
+Disallow: /admin/
+Disallow: /tmp/
+
+Sitemap: https://pescados-e-mariscos.vercel.app/sitemap.xml
+
+User-agent: Googlebot
+Allow: /Assets/Images/Produtos/
+Allow: /Assets/Links/produtos/
+Crawl-delay: 1
+
+User-agent: Googlebot-Image
+Allow: /Assets/Images/Produtos/
+
+User-agent: AhrefsBot
+Disallow: /
+
+User-agent: SemrushBot
+Disallow: /
