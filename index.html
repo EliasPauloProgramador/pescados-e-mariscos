@@ -41,8 +41,8 @@
     <link rel="stylesheet" href="Assets/Css/style.css">
     <link rel="stylesheet" href="Assets/Css/mobile.css">
     <link rel="stylesheet" href="Assets/Css/carrinho.css">
-    <link rel="stylesheet" href="Assets/Css/menu.css">
     <link rel="stylesheet" href="Assets/Css/header.css">
+    <link rel="stylesheet" href="Assets/Css/menu.css">
 
     <link rel="shortcut icon" href="Assets/Images/Produtos/favicon_cropped_colors.png" type="image/x-icon">
     
@@ -113,29 +113,26 @@
             </div>
             
             <!-- HAMBURGUER (visível apenas no mobile) -->
-            <div class="hamburguer" aria-label="Abrir menu">
+            <div class="hamburger" id="hamburger-btn" aria-label="Abrir menu">
                 <i class='bx bx-menu'></i>
             </div>
         </div>
     </div>
 
     <!-- OVERLAY PARA FECHAR MENU -->
-    <div class="overlay"></div>
+    <div class="overlay" id="menu-overlay"></div>
 
     <!-- MENU MOBILE (off-canvas) -->
-    <nav class="navigation mobile-menu" aria-label="Menu mobile" role="navigation">
-        <button class="close-menu" aria-label="Fechar menu">×</button>
+    <nav class="navigation mobile-menu" id="mobile-menu" aria-label="Menu mobile" role="navigation">
+        <button class="close-menu" id="close-menu-btn" aria-label="Fechar menu">×</button>
         <ul>
-            <li><a href="#home" class="nav-link">🏠 Início</a></li>
-            <li><a href="Assets/Links/produtos/produtos.html" class="nav-link">🐟 Produtos</a></li>
-            <li><a href="Assets/Links/sobre/sobre.html" class="nav-link">ℹ️ Sobre Nós</a></li>
-            <li><a href="#contato" class="nav-link">📞 Contactos</a></li>
+            <li><a href="#home" class="nav-link mobile-nav-link">🏠 Início</a></li>
+            <li><a href="Assets/Links/produtos/produtos.html" class="nav-link mobile-nav-link">🐟 Produtos</a></li>
+            <li><a href="Assets/Links/sobre/sobre.html" class="nav-link mobile-nav-link">ℹ️ Sobre Nós</a></li>
+            <li><a href="#contato" class="nav-link mobile-nav-link">📞 Contactos</a></li>
         </ul>
     </nav>
 </header>
-
-    <!-- Overlay -->
-    <div class="overlay"></div>
 
     <!-- BANNER -->
     <section id="home" class="banner" role="banner">

@@ -125,12 +125,18 @@ header .logo-text p {
 }
 
 /* === NAVIGATION - SEO FRIENDLY === */
-header .navigation {
+/* CORREÇÃO: Menu desktop sempre visível */
+.desktop-menu {
     display: flex;
     align-items: center;
 }
 
-header .navigation ul {
+/* CORREÇÃO: Menu mobile sempre escondido por padrão */
+.mobile-menu {
+    display: none;
+}
+
+.desktop-menu ul {
     display: flex;
     gap: clamp(20px, 3vw, 30px);
     margin: 0;
@@ -138,12 +144,12 @@ header .navigation ul {
     list-style: none;
 }
 
-header .navigation ul li {
+.desktop-menu ul li {
     position: relative;
 }
 
 /* Navigation links */
-header .navigation ul li a {
+.desktop-menu ul li a {
     color: var(--branco);
     font-family: 'Montserrat', sans-serif;
     font-weight: 500;
@@ -158,7 +164,7 @@ header .navigation ul li a {
 }
 
 /* Hover background effect */
-header .navigation ul li a::before {
+.desktop-menu ul li a::before {
     content: '';
     position: absolute;
     top: 0;
@@ -172,12 +178,12 @@ header .navigation ul li a::before {
     z-index: -1;
 }
 
-header .navigation ul li a:hover::before {
+.desktop-menu ul li a:hover::before {
     opacity: 1;
 }
 
 /* Underline animation */
-header .navigation ul li a::after {
+.desktop-menu ul li a::after {
     content: '';
     position: absolute;
     width: 0;
@@ -190,11 +196,11 @@ header .navigation ul li a::after {
     border-radius: 1px;
 }
 
-header .navigation ul li a:hover::after {
+.desktop-menu ul li a:hover::after {
     width: 60%;
 }
 
-header .navigation ul li a:hover {
+.desktop-menu ul li a:hover {
     color: var(--azul-claro);
     transform: translateY(-1px);
 }
@@ -276,7 +282,7 @@ header .navigation ul li a:hover {
     background: #ff4757;
     color: white;
     border-radius: 10px;
-    display: flex;
+    display: none; /* CORREÇÃO: Escondido por padrão */
     align-items: center;
     justify-content: center;
     line-height: 1;
@@ -284,9 +290,14 @@ header .navigation ul li a:hover {
     box-shadow: 0 2px 8px rgba(255, 71, 87, 0.3);
 }
 
+.cart-count.visible {
+    display: flex; /* CORREÇÃO: Mostrar apenas quando visível */
+}
+
 /* === HAMBURGER MENU - ACCESSIBLE === */
-.hamburguer {
-    display: none;
+/* CORREÇÃO: Classe corrigida para hamburger (sem 'u') */
+.hamburger {
+    display: none; /* CORREÇÃO: Escondido por padrão */
     cursor: pointer;
     background: rgba(255, 255, 255, 0.15);
     border: 2px solid rgba(255, 255, 255, 0.2);
@@ -302,28 +313,28 @@ header .navigation ul li a:hover {
     box-sizing: border-box;
 }
 
-.hamburguer:hover {
+.hamburger:hover {
     background: rgba(255, 255, 255, 0.25);
     border-color: var(--azul-claro);
     transform: scale(1.05);
     color: var(--azul-claro);
 }
 
-.hamburguer i {
+.hamburger i {
     transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.hamburguer.active i {
+.hamburger.active i {
     transform: rotate(90deg);
 }
 
 /* === ACTIVE STATES === */
-header .navigation ul li a.active {
+.desktop-menu ul li a.active {
     color: var(--azul-claro);
     background: rgba(79, 209, 199, 0.1);
 }
 
-header .navigation ul li a.active::after {
+.desktop-menu ul li a.active::after {
     width: 60%;
 }
 
@@ -347,8 +358,8 @@ header .navigation ul li a.active::after {
     }
     
     .header-btns .btn,
-    .hamburguer,
-    header .navigation ul li a {
+    .hamburger,
+    .desktop-menu ul li a {
         transition: none;
     }
 }
@@ -372,11 +383,11 @@ header .navigation ul li a.active::after {
 }
 
 @media (max-width: 968px) {
-    header .navigation ul {
+    .desktop-menu ul {
         gap: 15px;
     }
     
-    header .navigation ul li a {
+    .desktop-menu ul li a {
         font-size: 14px;
         padding: 6px 12px;
     }
@@ -387,6 +398,7 @@ header .navigation ul li a.active::after {
     }
 }
 
+/* CORREÇÃO: Breakpoint principal para mobile */
 @media (max-width: 768px) {
     header {
         padding: 12px 20px;
@@ -426,7 +438,8 @@ header .navigation ul li a.active::after {
         padding: 10px;
     }
     
-    .hamburguer {
+    /* CORREÇÃO: Mostrar hamburger apenas no mobile */
+    .hamburger {
         display: flex;
         min-width: 44px;
         min-height: 44px;
@@ -434,9 +447,9 @@ header .navigation ul li a.active::after {
         margin-left: 4px;
     }
     
-    /* Hide desktop navigation */
-    header .navigation {
-        display: none;
+    /* CORREÇÃO: Esconder desktop navigation no mobile */
+    .desktop-menu {
+        display: none !important;
     }
     
     /* Adjust cart badge for mobile */
@@ -477,7 +490,7 @@ header .navigation ul li a.active::after {
         padding: 8px;
     }
     
-    .hamburguer {
+    .hamburger {
         min-width: 40px;
         min-height: 40px;
         font-size: 16px;
@@ -504,7 +517,7 @@ header .navigation ul li a.active::after {
     }
     
     .header-btns .btn,
-    .hamburguer {
+    .hamburger {
         min-width: 36px;
         min-height: 36px;
         font-size: 14px;
@@ -514,13 +527,13 @@ header .navigation ul li a.active::after {
 /* === PERFORMANCE OPTIMIZATIONS === */
 header .logo,
 .header-btns .btn,
-.hamburguer {
+.hamburger {
     will-change: transform;
 }
 
 /* Content visibility for performance */
 @media (max-width: 768px) {
-    header .navigation {
+    .desktop-menu {
         content-visibility: auto;
         contain-intrinsic-size: 200px;
     }
@@ -528,8 +541,8 @@ header .logo,
 
 /* === FOCUS MANAGEMENT === */
 .header-btns .btn:focus-visible,
-.hamburguer:focus-visible,
-header .navigation ul li a:focus-visible {
+.hamburger:focus-visible,
+.desktop-menu ul li a:focus-visible {
     outline: 2px solid var(--azul-claro);
     outline-offset: 2px;
     border-color: var(--azul-claro);
@@ -576,12 +589,12 @@ header.scrolled {
 }
 
 /* === ACCESSIBILITY ENHANCEMENTS === */
-.hamburguer:focus-visible {
+.hamburger:focus-visible {
     outline: 2px solid var(--azul-claro);
     outline-offset: 2px;
 }
 
-.navigation a:focus-visible {
+.desktop-menu a:focus-visible {
     outline: 2px solid var(--azul-claro);
     outline-offset: 2px;
     border-radius: 25px;
@@ -594,4 +607,31 @@ header.scrolled {
         transition: none;
         animation: none;
     }
+}
+
+/* === CORREÇÕES ESPECÍFICAS PARA O MENU MOBILE === */
+/* Garantir que o menu mobile funcione corretamente */
+.mobile-menu.active {
+    display: flex !important;
+}
+
+/* Overlay do menu */
+#menu-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Estado do hamburger quando ativo */
+.hamburger.active {
+    background: rgba(79, 209, 199, 0.2);
+    border-color: var(--azul-claro);
+    color: var(--azul-claro);
+}
+
+/* Prevenir scroll do body quando menu está aberto */
+body.menu-open {
+    overflow: hidden;
+    position: fixed;
+    width: 100%;
+    height: 100%;
 }
