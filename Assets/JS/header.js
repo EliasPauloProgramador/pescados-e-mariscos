@@ -1,14 +1,11 @@
 /**
- * HEADER.JS - OPTIMIZED FOR SEO & PERFORMANCE
- * Controls mobile menu, cart badge, and header interactions
- * Enhanced for accessibility, SEO, and Core Web Vitals
+ * HEADER.JS - VERSÃO FINAL 100% FUNCIONAL
+ * Menu mobile completo com links funcionais
  */
 
-// SEO and Performance Optimizations
 class HeaderManager {
     constructor() {
         this.isMenuOpen = false;
-        this.cartUpdateTimeout = null;
         this.init();
     }
 
@@ -16,142 +13,137 @@ class HeaderManager {
         this.setupMobileMenu();
         this.setupCartBadge();
         this.setupHeaderScroll();
-        this.setupKeyboardNavigation();
-        this.setupPerformanceOptimizations();
-        
-        // Schema markup for header
-        this.injectHeaderSchema();
     }
 
     /**
-     * MOBILE MENU - SEO & ACCESSIBILITY OPTIMIZED
+     * MOBILE MENU - 100% FUNCIONAL COM LINKS
      */
     setupMobileMenu() {
         this.hamburguer = document.querySelector('.hamburguer');
-        this.navigation = document.querySelector('.navigation');
+        this.mobileMenu = document.querySelector('.mobile-menu');
         this.overlay = document.querySelector('.overlay');
+        this.closeBtn = document.querySelector('.close-menu');
         
-        if (!this.hamburguer || !this.navigation || !this.overlay) {
-            console.warn('Header elements not found - mobile menu disabled');
+        // Verifica se elementos existem
+        if (!this.hamburguer || !this.mobileMenu || !this.overlay) {
+            console.warn('Elementos do menu mobile não encontrados');
             return;
         }
-
-        this.icon = this.hamburguer.querySelector('i');
-        this.navLinks = document.querySelectorAll('.navigation a');
 
         this.addMenuEventListeners();
         this.setupMenuAccessibility();
     }
 
     addMenuEventListeners() {
-        // Hamburger click with debouncing
-        this.hamburguer.addEventListener('click', this.toggleMenu.bind(this), { passive: true });
+        // Hamburger click - ABRE menu
+        this.hamburguer.addEventListener('click', (e) => {
+            e.stopPropagation();
+            this.openMenu();
+        });
 
-        // Overlay click
-        this.overlay.addEventListener('click', this.closeMenu.bind(this), { passive: true });
+        // Overlay click - FECHA menu
+        this.overlay.addEventListener('click', (e) => {
+            e.stopPropagation();
+            this.closeMenu();
+        });
 
-        // Navigation links with event delegation
-        if (this.navLinks.length > 0) {
-            this.navigation.addEventListener('click', (e) => {
-                if (e.target.matches('.navigation a')) {
-                    this.closeMenu();
-                    this.trackNavigationClick(e.target);
-                }
-            }, { passive: true });
+        // Botão FECHAR - 100% FUNCIONAL
+        if (this.closeBtn) {
+            this.closeBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                this.closeMenu();
+            });
         }
 
-        // ESC key to close menu
+        // Fecha menu ao clicar em links (navegação)
+        const mobileLinks = this.mobileMenu.querySelectorAll('a');
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                this.closeMenu();
+            });
+        });
+
+        // ESC key para fechar
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape' && this.isMenuOpen) {
                 this.closeMenu();
             }
         });
 
-        // Resize handler with debouncing
+        // Fecha menu ao redimensionar para desktop
         window.addEventListener('resize', this.debounce(() => {
-            if (window.innerWidth > 768 && this.isMenuOpen) {
+            if (window.innerWidth > 968 && this.isMenuOpen) {
                 this.closeMenu();
             }
-        }, 250), { passive: true });
+        }, 250));
     }
 
     setupMenuAccessibility() {
-        // ARIA attributes for accessibility
+        // ARIA para acessibilidade
         this.hamburguer.setAttribute('aria-label', 'Abrir menu de navegação');
         this.hamburguer.setAttribute('aria-expanded', 'false');
-        this.hamburguer.setAttribute('aria-controls', 'main-navigation');
+        this.hamburguer.setAttribute('aria-controls', 'mobile-menu');
         
-        this.navigation.setAttribute('id', 'main-navigation');
-        this.navigation.setAttribute('aria-label', 'Navegação principal');
-    }
-
-    toggleMenu() {
-        if (this.isMenuOpen) {
-            this.closeMenu();
-        } else {
-            this.openMenu();
-        }
+        this.mobileMenu.setAttribute('id', 'mobile-menu');
+        this.mobileMenu.setAttribute('aria-label', 'Navegação mobile');
     }
 
     openMenu() {
-        this.navigation.classList.add('active');
+        this.mobileMenu.classList.add('active');
         this.overlay.classList.add('active');
         this.hamburguer.classList.add('active');
         
-        if (this.icon) {
-            this.icon.classList.replace('bx-menu', 'bx-x');
+        // Atualiza ícone
+        const icon = this.hamburguer.querySelector('i');
+        if (icon) {
+            icon.classList.replace('bx-menu', 'bx-x');
         }
 
-        // Update accessibility
+        // Atualiza acessibilidade
         this.hamburguer.setAttribute('aria-expanded', 'true');
         this.hamburguer.setAttribute('aria-label', 'Fechar menu de navegação');
         
-        // Trap focus in mobile menu
-        this.trapFocus(this.navigation);
+        // Trava scroll do body
+        document.body.style.overflow = 'hidden';
         
         this.isMenuOpen = true;
-
-        // SEO: Track menu open event
-        this.trackEvent('menu_open');
     }
 
     closeMenu() {
-        this.navigation.classList.remove('active');
+        this.mobileMenu.classList.remove('active');
         this.overlay.classList.remove('active');
         this.hamburguer.classList.remove('active');
         
-        if (this.icon && this.icon.classList.contains('bx-x')) {
-            this.icon.classList.replace('bx-x', 'bx-menu');
+        // Atualiza ícone
+        const icon = this.hamburguer.querySelector('i');
+        if (icon && icon.classList.contains('bx-x')) {
+            icon.classList.replace('bx-x', 'bx-menu');
         }
 
-        // Update accessibility
+        // Atualiza acessibilidade
         this.hamburguer.setAttribute('aria-expanded', 'false');
         this.hamburguer.setAttribute('aria-label', 'Abrir menu de navegação');
         
-        // Release focus trap
-        this.releaseFocus();
+        // Libera scroll do body
+        document.body.style.overflow = '';
         
         this.isMenuOpen = false;
-
-        // SEO: Track menu close event
-        this.trackEvent('menu_close');
     }
 
     /**
-     * CART BADGE - PERFORMANCE OPTIMIZED
+     * CART BADGE - OTIMIZADO
      */
     setupCartBadge() {
         this.updateCartBadge();
         
-        // Listen for cart updates with debouncing
+        // Escuta atualizações do carrinho
         window.addEventListener('storage', this.debounce(() => {
             this.updateCartBadge();
-        }, 100), { passive: true });
+        }, 100));
 
-        // Custom event for cart updates within same tab
         document.addEventListener('cartUpdated', this.debounce(() => {
             this.updateCartBadge();
-        }, 50), { passive: true });
+        }, 50));
     }
 
     updateCartBadge() {
@@ -160,52 +152,26 @@ class HeaderManager {
 
         try {
             const cart = JSON.parse(localStorage.getItem('cart')) || [];
-            const totalQty = cart.reduce((acc, item) => acc + (item.quantity || item.qtd || 0), 0);
+            const totalQty = cart.reduce((acc, item) => acc + (item.quantity || 1), 0);
             
-            // Update badge with animation
-            this.animateBadgeUpdate(badge, totalQty);
+            badge.textContent = totalQty > 99 ? '99+' : totalQty.toString();
             
-            // Update accessibility
-            badge.setAttribute('aria-label', `${totalQty} itens no carrinho`);
+            if (totalQty > 0) {
+                badge.style.display = 'flex';
+                badge.classList.add('visible');
+            } else {
+                badge.style.display = 'none';
+                badge.classList.remove('visible');
+            }
             
         } catch (error) {
-            console.error('Error updating cart badge:', error);
+            console.error('Erro ao atualizar badge:', error);
             badge.textContent = '0';
         }
     }
 
-    animateBadgeUpdate(badge, newCount) {
-        const currentCount = parseInt(badge.textContent) || 0;
-        
-        if (newCount !== currentCount) {
-            // Add animation class
-            badge.classList.add('badge-updating');
-            
-            // Update count
-            badge.textContent = newCount > 99 ? '99+' : newCount.toString();
-            
-            // Visual feedback
-            if (newCount > currentCount) {
-                badge.classList.add('badge-added');
-                setTimeout(() => badge.classList.remove('badge-added'), 300);
-            }
-            
-            // Remove animation class
-            setTimeout(() => badge.classList.remove('badge-updating'), 150);
-        }
-        
-        // Toggle visibility
-        if (newCount > 0) {
-            badge.classList.add('visible');
-            badge.style.display = 'flex';
-        } else {
-            badge.classList.remove('visible');
-            badge.style.display = 'none';
-        }
-    }
-
     /**
-     * HEADER SCROLL EFFECTS - PERFORMANCE OPTIMIZED
+     * HEADER SCROLL - PERFORMANCE
      */
     setupHeaderScroll() {
         let lastScrollY = window.scrollY;
@@ -223,13 +189,6 @@ class HeaderManager {
                 header.classList.remove('scrolled');
             }
 
-            // Hide/show on scroll direction
-            if (window.scrollY > lastScrollY && window.scrollY > 200) {
-                header.style.transform = 'translateY(-100%)';
-            } else {
-                header.style.transform = 'translateY(0)';
-            }
-
             lastScrollY = window.scrollY;
             ticking = false;
         };
@@ -245,147 +204,7 @@ class HeaderManager {
     }
 
     /**
-     * KEYBOARD NAVIGATION - ACCESSIBILITY
-     */
-    setupKeyboardNavigation() {
-        document.addEventListener('keydown', (e) => {
-            // Tab navigation within header
-            if (e.key === 'Tab' && this.isMenuOpen) {
-                this.handleMenuTabNavigation(e);
-            }
-        });
-    }
-
-    handleMenuTabNavigation(e) {
-        const focusableElements = this.navigation.querySelectorAll(
-            'a, button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
-        );
-        
-        if (focusableElements.length === 0) return;
-
-        const firstElement = focusableElements[0];
-        const lastElement = focusableElements[focusableElements.length - 1];
-
-        if (e.shiftKey && document.activeElement === firstElement) {
-            e.preventDefault();
-            lastElement.focus();
-        } else if (!e.shiftKey && document.activeElement === lastElement) {
-            e.preventDefault();
-            firstElement.focus();
-        }
-    }
-
-    trapFocus(element) {
-        const focusableElements = element.querySelectorAll(
-            'a, button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
-        );
-        
-        if (focusableElements.length > 0) {
-            setTimeout(() => focusableElements[0].focus(), 100);
-        }
-    }
-
-    releaseFocus() {
-        // Return focus to hamburger button
-        setTimeout(() => this.hamburguer.focus(), 100);
-    }
-
-    /**
-     * PERFORMANCE OPTIMIZATIONS
-     */
-    setupPerformanceOptimizations() {
-        // Preload critical resources
-        this.preloadCriticalResources();
-        
-        // Lazy load non-critical resources
-        this.lazyLoadNonCriticalResources();
-    }
-
-    preloadCriticalResources() {
-        // Preload mobile menu icons
-        const link = document.createElement('link');
-        link.rel = 'preload';
-        link.href = 'https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css';
-        link.as = 'style';
-        link.crossOrigin = 'anonymous';
-        document.head.appendChild(link);
-    }
-
-    lazyLoadNonCriticalResources() {
-        // Load non-critical CSS after page load
-        if ('IntersectionObserver' in window) {
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        // Can be used for lazy loading additional resources
-                        observer.unobserve(entry.target);
-                    }
-                });
-            });
-        }
-    }
-
-    /**
-     * SEO & ANALYTICS
-     */
-    trackNavigationClick(link) {
-        // SEO: Track internal navigation for analytics
-        const linkText = link.textContent.trim();
-        const linkHref = link.getAttribute('href');
-        
-        // Could be integrated with Google Analytics 4
-        console.log('Navigation click:', { linkText, linkHref });
-        
-        // Schema markup for navigation
-        this.updateBreadcrumbSchema(linkHref);
-    }
-
-    trackEvent(eventName) {
-        // SEO: Track user interactions for UX optimization
-        const eventData = {
-            event: eventName,
-            timestamp: new Date().toISOString(),
-            userAgent: navigator.userAgent,
-            viewport: `${window.innerWidth}x${window.innerHeight}`
-        };
-        
-        // Could be sent to analytics service
-        console.log('User event:', eventData);
-    }
-
-    injectHeaderSchema() {
-        // Inject Organization schema for SEO
-        const schemaScript = document.createElement('script');
-        schemaScript.type = 'application/ld+json';
-        schemaScript.textContent = JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "Organization",
-            "name": "L&A Pescados e Mariscos",
-            "url": window.location.origin,
-            "logo": `${window.location.origin}/Assets/Images/Produtos/favicon_cropped_colors.png`,
-            "description": "Peixaria online em Angola especializada em peixes frescos e mariscos",
-            "address": {
-                "@type": "PostalAddress",
-                "addressLocality": "Luanda",
-                "addressCountry": "AO"
-            },
-            "contactPoint": {
-                "@type": "ContactPoint",
-                "telephone": "+244-994-779-159",
-                "contactType": "customer service",
-                "areaServed": "AO"
-            }
-        });
-        document.head.appendChild(schemaScript);
-    }
-
-    updateBreadcrumbSchema(linkHref) {
-        // Update breadcrumb schema for better SEO
-        // This would be implemented based on your breadcrumb structure
-    }
-
-    /**
-     * UTILITY FUNCTIONS
+     * FUNÇÕES UTILITÁRIAS
      */
     debounce(func, wait) {
         let timeout;
@@ -398,52 +217,29 @@ class HeaderManager {
             timeout = setTimeout(later, wait);
         };
     }
-
-    throttle(func, limit) {
-        let inThrottle;
-        return function(...args) {
-            if (!inThrottle) {
-                func.apply(this, args);
-                inThrottle = true;
-                setTimeout(() => inThrottle = false, limit);
-            }
-        };
-    }
 }
 
-// Initialize when DOM is ready
+// Inicialização quando DOM estiver pronto
 document.addEventListener('DOMContentLoaded', () => {
-    // Use requestIdleCallback for non-critical initialization
     if ('requestIdleCallback' in window) {
         requestIdleCallback(() => {
             window.headerManager = new HeaderManager();
         });
     } else {
-        // Fallback for browsers that don't support requestIdleCallback
         setTimeout(() => {
             window.headerManager = new HeaderManager();
         }, 1000);
     }
 });
 
-// Export for module usage (if needed)
-if (typeof module !== 'undefined' && module.exports) {
-    module.exports = HeaderManager;
-}
-
-// Global function for cart updates (compatible with existing code)
-window.headerHelpers = {
-    updateCartBadge: function() {
-        if (window.headerManager) {
-            window.headerManager.updateCartBadge();
-        }
+// Função global para atualizar badge do carrinho
+window.updateCartBadge = function() {
+    if (window.headerManager) {
+        window.headerManager.updateCartBadge();
     }
 };
 
-// Error handling for production
+// Tratamento de erros
 window.addEventListener('error', (e) => {
-    console.error('Header script error:', e.error);
+    console.error('Erro no header.js:', e.error);
 });
-
-// Export updateCartBadge for backward compatibility
-window.updateCartBadge = window.headerHelpers.updateCartBadge;

@@ -76,75 +76,63 @@
             "https://vm.tiktok.com/ZMHnXuXbfmc6Y-QCgFM"
         ]
     }
-    </script>
-
-
-    <div class="header-container">
-        <!-- Logo e Nome -->
-        <div class="logo-container">
-            <img src="Assets/Images/logo.png" alt="L&A Pescados" loading="lazy">
-            <span class="company-name">L&A Pescados</span>
-        </div>
-
-        <!-- Menu Hamburger -->
-        <div class="hamburguer" aria-label="Abrir menu">
-            <i class='bx bx-menu'></i>
-        </div>
-
-        <!-- Overlay -->
-        <div class="overlay"></div>
-
-        <!-- Menu Navigation -->
-        <nav class="navigation" aria-label="Navegação principal">
-            <button class="close-menu" aria-label="Fechar menu">×</button>
-            <ul>
-                <li><a href="index.html" class="nav-home">🏠 Home</a></li>
-                <li><a href="Assets/Links/produtos/produtos.html" class="nav-products">🐟 Produtos</a></li>
-                <li><a href="Assets/Links/sobre/sobre.html" class="nav-about">ℹ️ Sobre Nós</a></li>
-                <li><a href="#contato" class="nav-contact">📞 Contactos</a></li>
-            </ul>
-        </nav>
-    </div>
-
+    </script> 
 
 </head>
 <body itemscope itemtype="https://schema.org/WebPage">
-    <!-- HEADER -->
-    <header id="header" role="banner">
-        <div class="container">
-            <div class="logo" itemprop="publisher" itemscope itemtype="https://schema.org/Organization">
-                <img src="Assets/Images/Produtos/favicon_cropped_colors.png" alt="Logo L&A Pescados e Mariscos - Peixaria Online Angola" class="logo-img" itemprop="logo">
-                <div class="logo-text">
-                    <h1 itemprop="name">L&A Pescados e Mariscos</h1>
-                    <p itemprop="description">Frescura direto do mar para sua mesa em Angola</p>
-                </div>
-            </div>
-
-            <nav class="navigation" role="navigation" aria-label="Menu principal">
-                <ul>
-                    <li><a href="#home" class="nav-link">Home</a></li>
-                    <li><a href="Assets/Links/produtos/produtos.html" class="nav-link">Produtos</a></li>
-                    <li><a href="Assets/Links/sobre/sobre.html" class="nav-link">Sobre Nós</a></li>
-                    <li><a href="#contato" class="nav-link">Contato</a></li>
-                </ul>
-            </nav>
-
-            <div class="btns-header">
-                <div class="header-btns">
-                    <a href="https://wa.me/+244994779159" class="btn whatsapp" aria-label="Falar no WhatsApp">
-                        <i class='bx bxl-whatsapp'></i>
-                    </a>
-                    <button id="cart-btn" class="btn cart" aria-label="Abrir carrinho de compras">
-                        <i class='bx bx-cart'></i>
-                        <span id="cart-count" class="cart-count">0</span>
-                    </button>
-                </div>
-                <div class="hamburguer">
-                    <i class='bx bx-menu'></i>
-                </div>
+<!-- HEADER -->
+<header id="header" role="banner">
+    <div class="container">
+        <div class="logo" itemprop="publisher" itemscope itemtype="https://schema.org/Organization">
+            <img src="Assets/Images/Produtos/favicon_cropped_colors.png" alt="Logo L&A Pescados e Mariscos - Peixaria Online Angola" class="logo-img" itemprop="logo">
+            <div class="logo-text">
+                <h1 itemprop="name">L&A Pescados e Mariscos</h1>
+                <p itemprop="description">Frescura direto do mar para sua mesa em Angola</p>
             </div>
         </div>
-    </header>
+
+        <!-- MENU DESKTOP (visível apenas em desktop) -->
+        <nav class="navigation desktop-menu" role="navigation" aria-label="Menu principal">
+            <ul>
+                <li><a href="#home" class="nav-link">Home</a></li>
+                <li><a href="Assets/Links/produtos/produtos.html" class="nav-link">Produtos</a></li>
+                <li><a href="Assets/Links/sobre/sobre.html" class="nav-link">Sobre Nós</a></li>
+                <li><a href="#contato" class="nav-link">Contato</a></li>
+            </ul>
+        </nav>
+
+        <div class="btns-header">
+            <div class="header-btns">
+                <a href="https://wa.me/+244994779159" class="btn whatsapp" aria-label="Falar no WhatsApp">
+                    <i class='bx bxl-whatsapp'></i>
+                </a>
+                <button id="cart-btn" class="btn cart" aria-label="Abrir carrinho de compras">
+                    <i class='bx bx-cart'></i>
+                    <span id="cart-count" class="cart-count">0</span>
+                </button>
+            </div>
+            
+            <!-- HAMBURGUER (visível apenas no mobile) -->
+            <div class="hamburguer" aria-label="Abrir menu">
+                <i class='bx bx-menu'></i>
+            </div>
+        </div>
+    </div>
+
+    <!-- OVERLAY PARA FECHAR MENU -->
+    <div class="overlay"></div>
+
+    <!-- MENU MOBILE (off-canvas) -->
+    <nav class="navigation mobile-menu" aria-label="Menu mobile" role="navigation">
+        <button class="close-menu" aria-label="Fechar menu">×</button>
+        <ul>
+            <li><a href="#home" class="nav-link">🏠 Início</a></li>
+            <li><a href="Assets/Links/produtos/produtos.html" class="nav-link">🐟 Produtos</a></li>
+            <li><a href="Assets/Links/sobre/sobre.html" class="nav-link">ℹ️ Sobre Nós</a></li>
+            <li><a href="#contato" class="nav-link">📞 Contactos</a></li>
+        </ul>
+    </nav>
+</header>
 
     <!-- Overlay -->
     <div class="overlay"></div>
