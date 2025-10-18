@@ -11,14 +11,14 @@
     
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://la-pescados.ao/sobre/">
+    <meta property="og:url" content="https://pescados-e-mariscos.vercel.app/sobre/">
     <meta property="og:title" content="Sobre Nós - L&A Pescados e Mariscos | História da Peixaria Angola">
     <meta property="og:description" content="Conheça a história da L&A Pescados e Mariscos em Angola. Peixaria familiar com peixes frescos e mariscos de qualidade desde 2023.">
-    <meta property="og:image" content="https://la-pescados.ao/Assets/Images/Produtos/favicon_cropped_colors.png">
+    <meta property="og:image" content="https://pescados-e-mariscos.vercel.app/Assets/Images/Produtos/favicon_cropped_colors.png">
     
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://la-pescados.ao/sobre/">
+    <meta property="twitter:url" content="https://pescados-e-mariscos.vercel.app/sobre/">
     <meta property="twitter:title" content="Sobre Nós - L&A Pescados e Mariscos | História da Peixaria Angola">
     <meta property="twitter:description" content="Conheça a história da L&A Pescados e Mariscos em Angola. Peixaria familiar desde 2023.">
     
@@ -31,6 +31,9 @@
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
 
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
     <!-- Boxicons -->
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 
@@ -38,7 +41,6 @@
     <link rel="stylesheet" href="../../Css/style.css">
     <link rel="stylesheet" href="../../Css/mobile.css">
     <link rel="stylesheet" href="../../Css/carrinho.css">
-    <link rel="stylesheet" href="../../Css/menu.css">
     <link rel="stylesheet" href="../../Css/header.css">
     <link rel="stylesheet" href="../../Css/sobre.css">
 
@@ -52,7 +54,7 @@
         "@type": "AboutPage",
         "name": "Sobre Nós - L&A Pescados e Mariscos",
         "description": "Conheça a história da L&A Pescados e Mariscos, peixaria familiar em Angola desde 2023",
-        "url": "https://la-pescados.ao/sobre/",
+        "url": "https://pescados-e-mariscos.vercel.app/sobre/",
         "mainEntity": {
             "@type": "Organization",
             "name": "L&A Pescados e Mariscos",
@@ -82,7 +84,7 @@
     </script>
 </head>
 <body itemscope itemtype="https://schema.org/WebPage">
-    <!-- HEADER -->
+    <!-- HEADER CORRIGIDO - MESMA ESTRUTURA DO INDEX.HTML -->
     <header id="header" role="banner">
         <div class="container">
             <div class="logo" itemprop="publisher" itemscope itemtype="https://schema.org/Organization">
@@ -93,7 +95,8 @@
                 </div>
             </div>
 
-            <nav class="navigation" role="navigation" aria-label="Menu principal">
+            <!-- MENU DESKTOP (visível apenas em desktop) -->
+            <nav class="navigation desktop-menu" role="navigation" aria-label="Menu principal">
                 <ul>
                     <li><a href="../../../index.html" class="nav-link">Home</a></li>
                     <li><a href="../produtos/produtos.html" class="nav-link">Produtos</a></li>
@@ -104,23 +107,25 @@
 
             <div class="btns-header">
                 <div class="header-btns">
-                    <a href="https://wa.me/+244994779159" class="btn whatsapp" title="Falar no WhatsApp L&A Pescados" aria-label="WhatsApp">
+                    <!-- CORREÇÃO: ÍCONES DE NAVEGAÇÃO DENTRO DO HEADER-BTNS -->
+                    <a href="../../../index.html" class="nav-icon home" aria-label="Início"><i class='fas fa-home'></i></a>
+                    <a href="../produtos/produtos.html" class="nav-icon products" aria-label="Produtos"><i class='fas fa-fish'></i></a>
+                    <a href="sobre.html" class="nav-icon about" aria-label="Sobre Nós"><i class='fas fa-info-circle'></i></a>
+                    <a href="../../../index.html#contato" class="nav-icon contact" aria-label="Contato"><i class='fas fa-phone'></i></a>
+
+                    <!-- Botões WhatsApp e Carrinho -->
+                    <a href="https://wa.me/+244994779159" class="btn whatsapp" aria-label="Falar no WhatsApp">
                         <i class='bx bxl-whatsapp'></i>
                     </a>
-                    <button id="cart-btn" class="btn cart" title="Abrir carrinho de compras" aria-label="Carrinho de compras">
+                    <button id="cart-btn" class="btn cart" aria-label="Abrir carrinho de compras">
                         <i class='bx bx-cart'></i>
                         <span id="cart-count" class="cart-count">0</span>
                     </button>
                 </div>
-                <div class="hamburguer">
-                    <i class='bx bx-menu'></i>
-                </div>
-            </div><!-- .btns-header -->
+                <!-- REMOVIDO: hamburger e menu mobile antigo -->
+            </div>
         </div>
     </header>
-
-    <!-- Overlay -->
-    <div class="overlay"></div>
 
     <!-- CART POPUP (global) -->
     <div id="cart-overlay" class="cart-overlay"></div>
@@ -377,13 +382,13 @@
                 "@type": "ListItem",
                 "position": 1,
                 "name": "Home",
-                "item": "https://la-pescados.ao/"
+                "item": "https://pescados-e-mariscos.vercel.app/"
             },
             {
                 "@type": "ListItem",
                 "position": 2,
                 "name": "Sobre Nós",
-                "item": "https://la-pescados.ao/sobre/"
+                "item": "https://pescados-e-mariscos.vercel.app/sobre/"
             }
         ]
     }

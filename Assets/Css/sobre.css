@@ -25,7 +25,7 @@
     background: var(--cinza-claro);
     padding: 16px 0;
     border-bottom: 1px solid var(--cinza-medio);
-    margin-top: 64px;
+    margin-top: 80px; /* CORREÇÃO: Ajustado para header fixo */
 }
 
 .breadcrumb .container {
@@ -84,6 +84,7 @@
     color: var(--branco);
     text-align: center;
     overflow: hidden;
+    margin-top: 0; /* CORREÇÃO: Removido margin-top extra */
 }
 
 .sobre-banner::before {
@@ -522,7 +523,7 @@
     border: 0;
 }
 
-/* === RESPONSIVIDADE === */
+/* === RESPONSIVIDADE - CORREÇÕES PARA MOBILE === */
 @media (max-width: 968px) {
     .sobre-banner {
         height: 50vh;
@@ -548,7 +549,7 @@
 
 @media (max-width: 768px) {
     .breadcrumb {
-        margin-top: 56px;
+        margin-top: 60px; /* Ajuste para header mobile */
         padding: 12px 0;
     }
 
@@ -629,7 +630,7 @@
     }
 
     .breadcrumb {
-        margin-top: 56px;
+        margin-top: 55px; /* Ajuste para mobile muito pequeno */
         padding: 10px 0;
     }
 

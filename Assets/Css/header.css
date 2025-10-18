@@ -1,31 +1,16 @@
 ﻿/* ===========================================
-   HEADER OPTIMIZED FOR SEO & PERFORMANCE
-   - Mobile-first approach
-   - Core Web Vitals optimization
-   - SEO-friendly structure
-   - Accessibility enhancements
-   =========================================== */
+HEADER.CSS - CORREÇÕES CONSOLIDADAS
+Compatível com mobile.css e menu.css
+=========================================== */
 
 /* === CSS VARIABLES === */
 :root {
     --header-height: 80px;
     --header-scrolled: 70px;
     --header-padding: 20px;
-    --header-mobile-height: 64px;
-    --header-mobile-scrolled: 56px;
+    --header-mobile-height: 60px;
+    --header-mobile-scrolled: 55px;
     --touch-target-min: 44px;
-}
-
-/* === SMOOTH SCROLLING === */
-html {
-    scroll-behavior: smooth;
-    scroll-padding-top: var(--header-height);
-}
-
-@media (prefers-reduced-motion: reduce) {
-    html {
-        scroll-behavior: auto;
-    }
 }
 
 /* === HEADER BASE STYLES === */
@@ -44,14 +29,6 @@ header {
     animation: headerSlideDown 0.6s cubic-bezier(0.25, 0.8, 0.25, 1) forwards;
 }
 
-/* Safe area support for notched devices */
-@supports (padding: max(0px)) {
-    header {
-        padding-left: max(50px, env(safe-area-inset-left));
-        padding-right: max(50px, env(safe-area-inset-right));
-    }
-}
-
 /* Scrolled state */
 header.scrolled {
     padding: 12px 50px;
@@ -61,7 +38,7 @@ header.scrolled {
     -webkit-backdrop-filter: blur(20px);
 }
 
-/* Header container */
+/* Header container - CORREÇÃO: Centralizado */
 header .container {
     width: 100%;
     display: flex;
@@ -80,7 +57,8 @@ header .logo {
     cursor: pointer;
     transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     text-decoration: none;
-    min-width: 0; /* Prevent flex overflow */
+    min-width: 0;
+    flex-shrink: 0;
 }
 
 header .logo:hover {
@@ -98,13 +76,12 @@ header .logo-img {
     flex-shrink: 0;
 }
 
-header .logo:hover .logo-img {
-    transform: scale(1.05);
-    border-color: var(--azul-claro);
-    box-shadow: 0 6px 20px rgba(79, 209, 199, 0.3);
+/* Logo text styles - CORREÇÃO: No mobile será escondido */
+header .logo-text {
+    display: flex;
+    flex-direction: column;
 }
 
-/* Logo text styles */
 header .logo-text h1 {
     font-family: 'Poppins', sans-serif;
     font-size: clamp(18px, 2.5vw, 24px);
@@ -113,6 +90,7 @@ header .logo-text h1 {
     margin: 0;
     line-height: 1.2;
     text-shadow: 0 2px 4px rgba(7, 32, 66, 0.3);
+    white-space: nowrap;
 }
 
 header .logo-text p {
@@ -122,18 +100,15 @@ header .logo-text p {
     color: rgba(179, 217, 255, 0.9);
     margin: 2px 0 0;
     line-height: 1.2;
+    white-space: nowrap;
 }
 
 /* === NAVIGATION - SEO FRIENDLY === */
-/* CORREÇÃO: Menu desktop sempre visível */
 .desktop-menu {
     display: flex;
     align-items: center;
-}
-
-/* CORREÇÃO: Menu mobile sempre escondido por padrão */
-.mobile-menu {
-    display: none;
+    flex: 1;
+    justify-content: center;
 }
 
 .desktop-menu ul {
@@ -163,7 +138,7 @@ header .logo-text p {
     line-height: 1.4;
 }
 
-/* Hover background effect */
+/* Hover effects desktop */
 .desktop-menu ul li a::before {
     content: '';
     position: absolute;
@@ -182,7 +157,6 @@ header .logo-text p {
     opacity: 1;
 }
 
-/* Underline animation */
 .desktop-menu ul li a::after {
     content: '';
     position: absolute;
@@ -246,11 +220,6 @@ header .logo-text p {
     color: var(--azul-claro);
 }
 
-.header-btns .btn:active {
-    transform: translateY(0) scale(0.98);
-    transition-duration: 0.1s;
-}
-
 /* WhatsApp specific styles */
 .header-btns .whatsapp:hover {
     border-color: #25d366;
@@ -261,12 +230,6 @@ header .logo-text p {
 /* Cart specific styles */
 .header-btns .cart {
     position: relative;
-}
-
-.header-btns .cart:hover {
-    border-color: var(--azul-claro);
-    color: var(--azul-claro);
-    box-shadow: 0 8px 25px rgba(79, 209, 199, 0.2);
 }
 
 /* Cart count badge */
@@ -282,7 +245,7 @@ header .logo-text p {
     background: #ff4757;
     color: white;
     border-radius: 10px;
-    display: none; /* CORREÇÃO: Escondido por padrão */
+    display: none;
     align-items: center;
     justify-content: center;
     line-height: 1;
@@ -291,41 +254,42 @@ header .logo-text p {
 }
 
 .cart-count.visible {
-    display: flex; /* CORREÇÃO: Mostrar apenas quando visível */
+    display: flex;
 }
 
-/* === HAMBURGER MENU - ACCESSIBLE === */
-/* CORREÇÃO: Classe corrigida para hamburger (sem 'u') */
-.hamburger {
-    display: none; /* CORREÇÃO: Escondido por padrão */
-    cursor: pointer;
+/* === NAVIGATION ICONS - CORREÇÃO CRÍTICA: MOVIDOS PARA HEADER-BTNS === */
+.header-btns .nav-icon {
+    display: none; /* Escondido no desktop */
     background: rgba(255, 255, 255, 0.15);
     border: 2px solid rgba(255, 255, 255, 0.2);
     border-radius: 50%;
-    padding: 12px;
-    transition: var(--transition-smooth);
-    color: var(--branco);
-    font-size: 20px;
-    min-width: var(--touch-target-min);
-    min-height: var(--touch-target-min);
+    width: 38px;
+    height: 38px;
+    font-size: 18px;
+    display: flex;
     align-items: center;
     justify-content: center;
-    box-sizing: border-box;
+    cursor: pointer;
+    transition: var(--transition-smooth);
+    color: var(--branco);
+    text-decoration: none;
 }
 
-.hamburger:hover {
+.header-btns .nav-icon:hover {
     background: rgba(255, 255, 255, 0.25);
     border-color: var(--azul-claro);
-    transform: scale(1.05);
+    transform: translateY(-2px) scale(1.05);
     color: var(--azul-claro);
 }
 
-.hamburger i {
-    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+/* === HAMBURGER MENU - REMOVIDO === */
+.hamburger {
+    display: none;
 }
 
-.hamburger.active i {
-    transform: rotate(90deg);
+/* === MOBILE NAV ICONS - REMOVIDO (AGORA ESTÃO NO HEADER) === */
+.mobile-nav-icons {
+    display: none; /* REMOVIDO - não precisamos mais disso */
 }
 
 /* === ACTIVE STATES === */
@@ -350,35 +314,13 @@ header .logo-text p {
     }
 }
 
-/* Reduced motion support */
-@media (prefers-reduced-motion: reduce) {
-    header {
-        animation: none;
-        transition: none;
-    }
-    
-    .header-btns .btn,
-    .hamburger,
-    .desktop-menu ul li a {
-        transition: none;
-    }
-}
-
 /* === RESPONSIVENESS === */
 @media (max-width: 1100px) {
     header {
         padding: var(--header-padding) 30px;
     }
-    
     header.scrolled {
         padding: 12px 30px;
-    }
-    
-    @supports (padding: max(0px)) {
-        header {
-            padding-left: max(30px, env(safe-area-inset-left));
-            padding-right: max(30px, env(safe-area-inset-right));
-        }
     }
 }
 
@@ -386,178 +328,103 @@ header .logo-text p {
     .desktop-menu ul {
         gap: 15px;
     }
-    
     .desktop-menu ul li a {
         font-size: 14px;
         padding: 6px 12px;
     }
     
-    .logo-img {
-        width: 50px;
-        height: 50px;
+    /* Ajuste do texto do logo em tablets */
+    header .logo-text h1 {
+        font-size: 16px;
+    }
+    header .logo-text p {
+        font-size: 10px;
     }
 }
 
-/* CORREÇÃO: Breakpoint principal para mobile */
+/* === MOBILE LAYOUT - ÍCONES NO HEADER === */
 @media (max-width: 768px) {
     header {
-        padding: 12px 20px;
-        height: var(--header-mobile-height);
+        padding: var(--header-padding) 15px;
     }
-    
     header.scrolled {
-        padding: 8px 20px;
-        height: var(--header-mobile-scrolled);
+        padding: 12px 15px;
     }
     
-    @supports (padding: max(0px)) {
-        header {
-            padding-left: max(20px, env(safe-area-inset-left));
-            padding-right: max(20px, env(safe-area-inset-right));
-        }
+    /* Esconde menu desktop */
+    .desktop-menu {
+        display: none;
     }
-
-    /* Hide logo text on mobile */
+    
+    /* Esconde texto do logo no mobile */
     header .logo-text {
-        display: none !important;
+        display: none;
     }
     
-    .logo-img {
-        width: 44px;
-        height: 44px;
+    /* Ajusta logo image no mobile */
+    header .logo-img {
+        width: 45px;
+        height: 45px;
+    }
+    
+    /* MOSTRA ÍCONES DE NAVEGAÇÃO NO HEADER */
+    .header-btns .nav-icon {
+        display: flex !important; /* Força exibição no mobile */
+    }
+    
+    /* Ajusta tamanhos dos botões no mobile */
+    .header-btns .btn,
+    .header-btns .nav-icon {
+        width: 38px;
+        height: 38px;
+        padding: 0;
+        font-size: 16px;
+    }
+    
+    .header-btns {
+        gap: 8px;
+    }
+    
+    /* Garante que o container do header ajuste corretamente */
+    header .container {
+        gap: 15px;
+        justify-content: space-between;
+    }
+}
+
+/* === LAYOUT PARA TELAS MUITO PEQUENAS === */
+@media (max-width: 480px) {
+    header {
+        padding: 15px 12px !important;
+    }
+    header.scrolled {
+        padding: 10px 12px !important;
     }
     
     .header-btns {
         gap: 6px;
     }
     
-    .header-btns .btn {
-        min-width: 44px;
-        min-height: 44px;
-        font-size: 18px;
-        padding: 10px;
-    }
-    
-    /* CORREÇÃO: Mostrar hamburger apenas no mobile */
-    .hamburger {
-        display: flex;
-        min-width: 44px;
-        min-height: 44px;
-        font-size: 18px;
-        margin-left: 4px;
-    }
-    
-    /* CORREÇÃO: Esconder desktop navigation no mobile */
-    .desktop-menu {
-        display: none !important;
-    }
-    
-    /* Adjust cart badge for mobile */
-    .cart-count {
-        top: -4px;
-        right: -4px;
-        min-width: 18px;
-        height: 18px;
-        font-size: 10px;
-    }
-}
-
-@media (max-width: 480px) {
-    header {
-        padding: 10px 16px;
-    }
-    
-    header.scrolled {
-        padding: 6px 16px;
-    }
-    
-    @supports (padding: max(0px)) {
-        header {
-            padding-left: max(16px, env(safe-area-inset-left));
-            padding-right: max(16px, env(safe-area-inset-right));
-        }
-    }
-    
-    .logo-img {
-        width: 40px;
-        height: 40px;
-    }
-    
-    .header-btns .btn {
-        min-width: 40px;
-        min-height: 40px;
-        font-size: 16px;
-        padding: 8px;
-    }
-    
-    .hamburger {
-        min-width: 40px;
-        min-height: 40px;
-        font-size: 16px;
-    }
-    
-    .btns-header {
-        gap: 12px;
-    }
-    
-    .header-btns {
-        gap: 4px;
-    }
-}
-
-/* === VERY SMALL SCREENS === */
-@media (max-width: 320px) {
-    header {
-        padding: 8px 12px;
-    }
-    
-    .logo-img {
+    .header-btns .btn,
+    .header-btns .nav-icon {
         width: 36px;
         height: 36px;
+        font-size: 15px;
     }
     
-    .header-btns .btn,
-    .hamburger {
-        min-width: 36px;
-        min-height: 36px;
-        font-size: 14px;
-    }
-}
-
-/* === PERFORMANCE OPTIMIZATIONS === */
-header .logo,
-.header-btns .btn,
-.hamburger {
-    will-change: transform;
-}
-
-/* Content visibility for performance */
-@media (max-width: 768px) {
-    .desktop-menu {
-        content-visibility: auto;
-        contain-intrinsic-size: 200px;
+    header .logo-img {
+        width: 40px;
+        height: 40px;
     }
 }
 
 /* === FOCUS MANAGEMENT === */
 .header-btns .btn:focus-visible,
-.hamburger:focus-visible,
+.header-btns .nav-icon:focus-visible,
 .desktop-menu ul li a:focus-visible {
     outline: 2px solid var(--azul-claro);
     outline-offset: 2px;
     border-color: var(--azul-claro);
-}
-
-/* === HIGH CONTRAST MODE SUPPORT === */
-@media (prefers-contrast: high) {
-    header {
-        background: var(--azul-marinho);
-        border-bottom: 2px solid var(--azul-claro);
-    }
-    
-    .header-btns .btn {
-        border-width: 3px;
-    }
 }
 
 /* === CART BADGE ANIMATIONS === */
@@ -579,59 +446,7 @@ header .logo,
 
 /* === HEADER SCROLL EFFECTS === */
 header {
-    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), 
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
                 background-color 0.3s ease,
                 padding 0.3s ease;
-}
-
-header.scrolled {
-    transform: translateY(0) !important;
-}
-
-/* === ACCESSIBILITY ENHANCEMENTS === */
-.hamburger:focus-visible {
-    outline: 2px solid var(--azul-claro);
-    outline-offset: 2px;
-}
-
-.desktop-menu a:focus-visible {
-    outline: 2px solid var(--azul-claro);
-    outline-offset: 2px;
-    border-radius: 25px;
-}
-
-/* Reduced motion support */
-@media (prefers-reduced-motion: reduce) {
-    .cart-count,
-    header {
-        transition: none;
-        animation: none;
-    }
-}
-
-/* === CORREÇÕES ESPECÍFICAS PARA O MENU MOBILE === */
-/* Garantir que o menu mobile funcione corretamente */
-.mobile-menu.active {
-    display: flex !important;
-}
-
-/* Overlay do menu */
-#menu-overlay.active {
-    opacity: 1;
-    visibility: visible;
-}
-
-/* Estado do hamburger quando ativo */
-.hamburger.active {
-    background: rgba(79, 209, 199, 0.2);
-    border-color: var(--azul-claro);
-    color: var(--azul-claro);
-}
-
-/* Prevenir scroll do body quando menu está aberto */
-body.menu-open {
-    overflow: hidden;
-    position: fixed;
-    width: 100%;
-    height: 100%;
 }

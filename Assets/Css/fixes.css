@@ -1,0 +1,140 @@
+﻿/* ===========================================
+FIXES.CSS - CORREÇÕES URGENTES (ATUALIZADO)
+Problema: Texto do banner invisível (resolvido); ajuste de z-index e layout
+=========================================== */
+
+/* === CORREÇÃO CRÍTICA: Z-INDEX HIERARQUIA FIXA === */
+.cart-popup {
+    z-index: 99999 !important;
+}
+
+.cart-overlay {
+    z-index: 99998 !important;
+}
+
+/* === CORREÇÃO: BANNER E TEXTO DO BANNER === */
+.banner {
+    z-index: 1 !important;
+    position: relative !important;
+    overflow: visible !important;
+}
+
+.banner-text {
+    display: block !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    z-index: 99995 !important;
+    position: absolute !important;
+    top: 50% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) !important;
+    color: #fff !important;
+}
+
+.banner-slider,
+.slide,
+.slide-overlay {
+    z-index: 1 !important;
+}
+
+/* === CORREÇÃO: HEADER === */
+header {
+    z-index: 1000 !important; /* Alinhado com mobile.css */
+}
+
+/* === CORREÇÃO: ELIMINAR SCROLL LATERAL E CONFLITOS === */
+html, body {
+    max-width: 100% !important;
+    overflow-x: hidden !important;
+    position: relative !important;
+}
+
+* {
+    box-sizing: border-box;
+    max-width: 100% !important;
+}
+
+/* === CORREÇÃO: AJUSTES RESPONSIVOS === */
+@media (max-width: 912px) {
+    header {
+        padding: 8px 12px !important;
+    }
+
+    .logo-text {
+        display: none !important;
+    }
+
+    .btns-header {
+        gap: 4px !important;
+    }
+
+    .header-btns {
+        gap: 4px !important;
+    }
+
+    .header-btns .btn {
+        width: 38px !important;
+        height: 38px !important;
+        font-size: 16px !important;
+    }
+
+    .banner {
+        width: 100vw !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        height: 60vh !important;
+        min-height: 400px !important;
+    }
+
+    .banner-slider,
+    .banner-slider .slide,
+    .banner-slider .slide img {
+        width: 100vw !important;
+        max-width: 100vw !important;
+    }
+
+    .banner-text {
+        top: 45% !important;
+        padding: 0 16px !important;
+        width: 90% !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .banner {
+        height: 50vh !important;
+        min-height: 300px !important;
+    }
+
+    .banner-text {
+        top: 40% !important;
+        padding: 0 12px !important;
+    }
+}
+
+/* === CORREÇÃO: PREVENIR FLICKERING E SOBREPOSIÇÃO === */
+.home-feedback-message,
+.cart-feedback {
+    z-index: 99994 !important;
+    top: 80px !important;
+}
+
+/* === CORRIGIR TEXTO DO BANNER (VISIBILIDADE) === */
+.banner-text {
+    position: absolute !important;
+    top: 50% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) !important;
+    z-index: 99995 !important; /* Alinhado com acima */
+    opacity: 1 !important;
+    visibility: visible !important;
+    color: #fff !important;
+    text-shadow: 0 3px 6px rgba(0, 0, 0, 0.6) !important;
+}
+
+.banner-slider,
+.banner-slider .slide,
+.banner-slider .slide img,
+.slide-overlay {
+    z-index: 1 !important;
+}

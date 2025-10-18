@@ -11,14 +11,14 @@
     
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://la-pescados.ao/produtos/">
+    <meta property="og:url" content="https://pescados-e-mariscos.vercel.app/produtos/">
     <meta property="og:title" content="Catálogo Completo - L&A Pescados e Mariscos | Peixes Frescos Angola">
     <meta property="og:description" content="Catálogo completo de peixes frescos e mariscos em Angola. Mais de 50 variedades disponíveis com entrega em Luanda.">
-    <meta property="og:image" content="https://la-pescados.ao/Assets/Images/Produtos/favicon_cropped_colors.png">
+    <meta property="og:image" content="https://pescados-e-mariscos.vercel.app/Assets/Images/Produtos/favicon_cropped_colors.png">
     
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://la-pescados.ao/produtos/">
+    <meta property="twitter:url" content="https://pescados-e-mariscos.vercel.app/produtos/">
     <meta property="twitter:title" content="Catálogo Completo - L&A Pescados e Mariscos | Peixes Frescos Angola">
     <meta property="twitter:description" content="Catálogo completo de peixes frescos e mariscos em Angola. Entrega rápida em Luanda.">
     
@@ -32,11 +32,14 @@
     <link rel="stylesheet" href="../../Css/produtos.css">
     <link rel="stylesheet" href="../../Css/mobile.css">
     <link rel="stylesheet" href="../../Css/carrinho.css">
-    <link rel="stylesheet" href="../../Css/menu.css">
     <link rel="stylesheet" href="../../Css/header.css">
+    <!-- REMOVIDO: menu.css (não é mais necessário) -->
 
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
     <!-- Boxicons -->
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
@@ -51,7 +54,7 @@
         "@type": "ItemList",
         "name": "Catálogo de Pescados e Mariscos - L&A Angola",
         "description": "Lista completa de peixes frescos e mariscos disponíveis na L&A Pescados e Mariscos em Angola",
-        "url": "https://la-pescados.ao/produtos/",
+        "url": "https://pescados-e-mariscos.vercel.app/produtos/",
         "numberOfItems": "50",
         "itemListOrder": "https://schema.org/ItemListUnordered",
         "itemListElement": [
@@ -92,10 +95,10 @@
     </script>
 </head>
 <body itemscope itemtype="https://schema.org/WebPage">
+    <!-- HEADER CORRIGIDO - MESMA ESTRUTURA DO INDEX.HTML -->
     <header id="header" role="banner">
         <div class="container">
             <div class="logo" itemprop="publisher" itemscope itemtype="https://schema.org/Organization">
-                <!-- Logo CORRIGIDO -->
                 <img src="../../Images/Produtos/favicon_cropped_colors.png" alt="Logo L&A Pescados e Mariscos - Peixaria Online Angola" class="logo-img" itemprop="logo">
                 <div class="logo-text">
                     <h1 itemprop="name">L&A Pescados e Mariscos</h1>
@@ -103,35 +106,37 @@
                 </div>
             </div>
 
-            <nav class="navigation" role="navigation" aria-label="Menu principal">
+            <!-- MENU DESKTOP (visível apenas em desktop) -->
+            <nav class="navigation desktop-menu" role="navigation" aria-label="Menu principal">
                 <ul>
-                    <li><a href="../../../index.html">Home</a></li>
-                    <li><a href="produtos.html" class="active">Produtos</a></li>
-                    <li><a href="../sobre/sobre.html">Sobre</a></li>
-                    <li><a href="../../../index.html#contato">Contato</a></li>
+                    <li><a href="../../../index.html" class="nav-link">Home</a></li>
+                    <li><a href="produtos.html" class="nav-link active">Produtos</a></li>
+                    <li><a href="../sobre/sobre.html" class="nav-link">Sobre</a></li>
+                    <li><a href="../../../index.html#contato" class="nav-link">Contato</a></li>
                 </ul>
             </nav>
 
             <div class="btns-header">
                 <div class="header-btns">
-                    <a href="https://wa.me/244994779159" class="btn whatsapp" title="Falar no WhatsApp L&A Pescados" aria-label="WhatsApp">
+                    <!-- CORREÇÃO: ÍCONES DE NAVEGAÇÃO DENTRO DO HEADER-BTNS -->
+                    <a href="../../../index.html" class="nav-icon home" aria-label="Início"><i class='fas fa-home'></i></a>
+                    <a href="produtos.html" class="nav-icon products" aria-label="Produtos"><i class='fas fa-fish'></i></a>
+                    <a href="../sobre/sobre.html" class="nav-icon about" aria-label="Sobre Nós"><i class='fas fa-info-circle'></i></a>
+                    <a href="../../../index.html#contato" class="nav-icon contact" aria-label="Contato"><i class='fas fa-phone'></i></a>
+
+                    <!-- Botões WhatsApp e Carrinho -->
+                    <a href="https://wa.me/244994779159" class="btn whatsapp" aria-label="Falar no WhatsApp">
                         <i class='bx bxl-whatsapp'></i>
                     </a>
-                    <button id="cart-btn" class="btn cart" title="Abrir carrinho de compras" aria-label="Carrinho de compras">
+                    <button id="cart-btn" class="btn cart" aria-label="Abrir carrinho de compras">
                         <i class='bx bx-cart'></i>
                         <span id="cart-count" class="cart-count">0</span>
                     </button>
                 </div>
-
-                <div class="hamburguer">
-                    <i class='bx bx-menu'></i>
-                </div>
+                <!-- REMOVIDO: hamburger e menu mobile antigo -->
             </div>
         </div>
     </header>
-
-    <!-- Overlay -->
-    <div class="overlay"></div>
 
     <!-- CART POPUP (global) -->
     <div id="cart-overlay" class="cart-overlay"></div>
@@ -282,13 +287,13 @@
                 "@type": "ListItem",
                 "position": 1,
                 "name": "Home",
-                "item": "https://la-pescados.ao/"
+                "item": "https://pescados-e-mariscos.vercel.app/"
             },
             {
                 "@type": "ListItem",
                 "position": 2,
                 "name": "Produtos",
-                "item": "https://la-pescados.ao/produtos/"
+                "item": "https://pescados-e-mariscos.vercel.app/produtos/"
             }
         ]
     }

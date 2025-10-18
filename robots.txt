@@ -1,29 +1,39 @@
 ﻿User-agent: *
 Allow: /
-Allow: /Assets/
-Allow: /Assets/Css/
-Allow: /Assets/Images/
-Allow: /Assets/Images/Produtos/
-Allow: /Assets/JS/
-Allow: /Assets/Links/
-Allow: /Assets/Links/produtos/
-Allow: /Assets/Links/sobre/
 
+# URLs importantes para SEO
+Allow: /index.html
+Allow: /Assets/Links/produtos/produtos.html
+Allow: /Assets/Links/sobre/sobre.html
+
+# Bloquear áreas sensíveis
 Disallow: /admin/
 Disallow: /tmp/
+Disallow: /backup/
+Disallow: /config/
+Disallow: /node_modules/
 
+# Sitemap com domínio correto do Vercel
 Sitemap: https://pescados-e-mariscos.vercel.app/sitemap.xml
 
+# Otimização para Google
 User-agent: Googlebot
-Allow: /Assets/Images/Produtos/
-Allow: /Assets/Links/produtos/
+Allow: /
 Crawl-delay: 1
 
 User-agent: Googlebot-Image
 Allow: /Assets/Images/Produtos/
+Allow: /Assets/Images/
 
+# Bloquear bots indesejados
 User-agent: AhrefsBot
 Disallow: /
 
 User-agent: SemrushBot
+Disallow: /
+
+User-agent: MJ12bot
+Disallow: /
+
+User-agent: DotBot
 Disallow: /

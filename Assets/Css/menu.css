@@ -1,398 +1,100 @@
-﻿/* === MENU MOBILE OFF-CANVAS === */
+﻿/* ===========================================
+MENU.CSS - CORREÇÕES CONSOLIDADAS
+Foco em z-index do banner e remoção de estilos obsoletos
+=========================================== */
 
-/* Overlay para fechar menu clicando fora */
-.overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100vh;
-    background: rgba(7, 32, 66, 0.8); /* Azul marinho com transparência */
-    backdrop-filter: blur(4px);
-    opacity: 0;
-    visibility: hidden;
-    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-    z-index: 1000;
-}
-
-.overlay.active {
-    opacity: 1;
-    visibility: visible;
-}
-
-/* CORREÇÃO: Menu desktop sempre visível em telas grandes */
-.desktop-menu {
-    display: flex;
-}
-
-/* CORREÇÃO: Menu mobile sempre escondido por padrão */
-.mobile-menu {
-    display: none;
-    position: fixed;
-    top: 0;
-    right: -100%;
-    width: min(75vw, 350px);
-    height: 100vh;
-    background: linear-gradient(135deg, var(--azul-marinho) 0%, var(--azul-escuro) 100%);
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: stretch;
-    padding: 80px 25px 30px;
-    box-shadow: -8px 0 25px rgba(7, 32, 66, 0.4);
-    transition: right 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
-    z-index: 1100;
-    overflow-y: auto;
-}
-
-/* CORREÇÃO: Botão de fechar específico para mobile */
+/* === REMOÇÃO COMPLETA DO MENU HAMBÚRGUER === */
+.hamburger,
+.mobile-menu,
+.overlay,
 .close-menu {
-    position: absolute;
-    top: 20px;
-    right: 25px;
-    font-size: 35px;
-    color: var(--branco);
-    cursor: pointer;
-    width: 40px;
-    height: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.1);
-    transition: var(--transition-smooth);
-    border: none;
-    z-index: 1101;
+    display: none !important;
 }
 
-.close-menu:hover {
-    background: rgba(79, 209, 199, 0.2);
-    color: var(--azul-claro);
-    transform: scale(1.1);
+/* === ESTILOS PARA GARANTIR O BANNER PRESO AO HEADER === */
+/* CORREÇÃO: Banner abaixo do header mas conteúdo acima */
+.banner {
+    position: relative;
+    width: 100vw;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+    height: 90vh;
+    min-height: 600px;
+    overflow: hidden;
+    border-radius: 0 0 30px 30px;
+    margin-bottom: 40px;
+    z-index: 1; /* Abaixo do header */
 }
 
-/* CORREÇÃO: Hamburger visível apenas no mobile */
-.hamburger {
-    display: none;
-    cursor: pointer;
-    font-size: 28px;
-    color: var(--branco);
-    transition: var(--transition-smooth);
-    padding: 8px;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.1);
+.banner-text {
+    z-index: 99995; /* Acima do header */
+    position: relative;
 }
 
-.hamburger:hover {
-    background: rgba(79, 209, 199, 0.2);
-    color: var(--azul-claro);
-    transform: scale(1.1);
-}
-
-/* === MENU RESPONSIVO === */
-@media (max-width: 968px) {
-    /* CORREÇÃO: Esconder navegação desktop no mobile */
-    .desktop-menu {
-        display: none !important;
+/* === CORREÇÕES DE Z-INDEX PARA MOBILE === */
+@media (max-width: 768px) {
+    .banner {
+        z-index: 1;
     }
     
-    /* CORREÇÃO: Mostrar hambúrguer apenas no mobile */
-    .hamburger {
-        display: flex !important;
+    .banner-text {
+        z-index: 99995;
     }
-
-    /* CORREÇÃO: Mostrar menu mobile quando ativo */
-    .mobile-menu.active {
-        display: flex;
-        right: 0;
+    
+    /* Garante que o header tenha prioridade máxima */
+    header {
+        z-index: 1000 !important;
     }
-
-    /* CORREÇÃO: Header do menu mobile */
-    .mobile-menu::before {
-        content: 'Menu';
-        position: absolute;
-        top: 25px;
-        left: 25px;
-        font-family: 'Poppins', sans-serif;
-        font-size: 24px;
-        font-weight: 700;
-        color: var(--azul-claro);
-        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    
+    /* Remove qualquer estilo relacionado ao mobile-nav-icons antigo */
+    .mobile-nav-icons {
+        display: none !important;
     }
 }
 
-@media (max-width: 768px) {
-    /* CORREÇÃO: Ajustes específicos para mobile */
-    .mobile-menu {
-        width: min(75vw, 350px);
-        padding: 80px 25px 30px;
-    }
-
-    /* Lista de navegação mobile */
-    .mobile-menu ul {
-        display: flex;
-        flex-direction: column;
-        gap: 8px;
-        margin: 0;
-        padding: 0;
-        list-style: none;
-        width: 100%;
-    }
-
-    .mobile-menu ul li {
-        width: 100%;
-        opacity: 0;
-        transform: translateX(30px);
-        animation: slideInMenu 0.4s ease forwards;
-    }
-
-    .mobile-menu ul li:nth-child(1) { animation-delay: 0.1s; }
-    .mobile-menu ul li:nth-child(2) { animation-delay: 0.2s; }
-    .mobile-menu ul li:nth-child(3) { animation-delay: 0.3s; }
-    .mobile-menu ul li:nth-child(4) { animation-delay: 0.4s; }
-
-    @keyframes slideInMenu {
-        to {
-            opacity: 1;
-            transform: translateX(0);
-        }
-    }
-
-    .mobile-menu ul li a {
-        font-family: 'Montserrat', sans-serif;
-        font-size: 18px;
-        font-weight: 500;
-        color: var(--branco);
-        display: flex;
-        align-items: center;
-        gap: 12px;
-        width: 100%;
-        padding: 16px 20px;
-        text-decoration: none;
-        border-radius: var(--border-radius);
-        background: rgba(255, 255, 255, 0.05);
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        margin-bottom: 4px;
-        transition: var(--transition-smooth);
-        position: relative;
-        overflow: hidden;
-    }
-
-    .mobile-menu ul li a::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: -100%;
-        width: 100%;
-        height: 100%;
-        background: linear-gradient(90deg, transparent, rgba(79, 209, 199, 0.1), transparent);
-        transition: left 0.5s ease;
-    }
-
-    .mobile-menu ul li a:hover::before {
-        left: 100%;
-    }
-
-    .mobile-menu ul li a:hover {
-        background: rgba(79, 209, 199, 0.15);
-        border-color: var(--azul-claro);
-        color: var(--branco);
-        transform: translateX(8px);
-        box-shadow: 0 4px 15px rgba(79, 209, 199, 0.2);
-    }
-
-    .mobile-menu ul li a:active {
-        transform: translateX(4px) scale(0.98);
-    }
-
-    /* Links ativos com azul claro */
-    .mobile-menu ul li a.active {
-        background: rgba(79, 209, 199, 0.2);
-        border-color: var(--azul-claro);
-        color: var(--branco);
-        font-weight: 600;
-    }
-
-    .mobile-menu ul li a.active::after {
-        content: '';
-        position: absolute;
-        right: 15px;
-        top: 50%;
-        transform: translateY(-50%);
-        width: 8px;
-        height: 8px;
-        background: var(--azul-claro);
-        border-radius: 50%;
-        box-shadow: 0 0 10px rgba(79, 209, 199, 0.5);
-    }
-
-    /* Ícones dos links (já incluídos no HTML) */
-    .mobile-menu ul li a[href="#home"]::before {
-        content: '🏠';
-        font-size: 16px;
-        margin-right: 4px;
-    }
-
-    .mobile-menu ul li a[href*="produtos"]::before {
-        content: '🐟';
-        font-size: 16px;
-        margin-right: 4px;
-    }
-
-    .mobile-menu ul li a[href*="sobre"]::before {
-        content: 'ℹ️';
-        font-size: 16px;
-        margin-right: 4px;
-    }
-
-    .mobile-menu ul li a[href="#contato"]::before {
-        content: '📞';
-        font-size: 16px;
-        margin-right: 4px;
-    }
-
-    /* Seção de contato no menu */
-    .mobile-menu::after {
-        content: '';
-        margin-top: auto;
-        padding-top: 30px;
-        border-top: 1px solid rgba(255, 255, 255, 0.1);
-    }
-}
-
-/* === BREAKPOINTS ESPECÍFICOS === */
-@media (max-width: 580px) {
-    .mobile-menu {
-        width: min(85vw, 300px);
-        padding: 70px 20px 25px;
-    }
-
-    .mobile-menu ul li a {
-        font-size: 16px;
-        padding: 14px 18px;
-    }
-
-    .close-menu {
-        top: 18px;
-        right: 20px;
-        font-size: 30px;
-        width: 36px;
-        height: 36px;
-    }
-
-    .mobile-menu::before {
-        font-size: 20px;
-        top: 22px;
-        left: 20px;
-    }
-}
-
+/* === CORREÇÕES PARA TELAS MUITO PEQUENAS === */
 @media (max-width: 480px) {
-    .mobile-menu {
-        width: 100vw;
-        padding: 70px 20px 25px;
-        right: -100vw;
+    .banner {
+        min-height: 500px;
+        height: 85vh;
     }
-
-    .mobile-menu ul li a {
-        font-size: 15px;
-        padding: 12px 16px;
-    }
-
-    .mobile-menu::before {
-        font-size: 18px;
-        top: 20px;
-        left: 20px;
-    }
-
-    .close-menu {
-        top: 16px;
-        right: 20px;
-        font-size: 28px;
-        width: 34px;
-        height: 34px;
+    
+    .banner-text {
+        padding: 0 20px;
     }
 }
 
-/* === ESTADOS DE TRANSIÇÃO === */
-.mobile-menu.opening {
-    animation: slideInFromRight 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+/* === GARANTIR QUE NÃO HAJA CONFLITOS COM OS NOVOS ÍCONES NO HEADER === */
+.header-btns .nav-icon {
+    /* Estes estilos já estão no header.css - não duplicar */
 }
 
-.mobile-menu.closing {
-    animation: slideOutToRight 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+/* === REMOÇÃO DE ESTILOS OBSOLETOS DO MENU HAMBÚRGUER === */
+/* Todos os estilos abaixo foram removidos permanentemente */
+.mobile-nav-icons,
+.hamburger-menu,
+.mobile-nav-container,
+.menu-overlay {
+    display: none !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
 }
 
-@keyframes slideInFromRight {
-    from {
-        right: -100%;
-        opacity: 0;
-    }
-    to {
-        right: 0;
-        opacity: 1;
-    }
+/* === CORREÇÃO FINAL: GARANTIR QUE O HEADER SEMPRE FIQUE POR CIMA === */
+header {
+    z-index: 1000 !important;
 }
 
-@keyframes slideOutToRight {
-    from {
-        right: 0;
-        opacity: 1;
-    }
-    to {
-        right: -100%;
-        opacity: 0;
-    }
+.banner-slider,
+.banner-slider .slide,
+.banner-slider img {
+    z-index: 1 !important;
 }
 
-/* === MELHORIAS DE PERFORMANCE === */
-.mobile-menu {
-    will-change: right;
-    transform: translateZ(0);
-}
-
-.mobile-menu ul li a {
-    will-change: transform, background-color;
-}
-
-/* === SCROLLBAR CUSTOMIZADA PARA MENU === */
-.mobile-menu::-webkit-scrollbar {
-    width: 4px;
-}
-
-.mobile-menu::-webkit-scrollbar-track {
-    background: transparent;
-}
-
-.mobile-menu::-webkit-scrollbar-thumb {
-    background: rgba(79, 209, 199, 0.3);
-    border-radius: 2px;
-}
-
-.mobile-menu::-webkit-scrollbar-thumb:hover {
-    background: rgba(79, 209, 199, 0.5);
-}
-
-/* CORREÇÃO: Prevenir scroll do body quando menu está aberto */
-body.menu-open {
-    overflow: hidden;
-}
-
-/* CORREÇÃO: Estados do hamburger quando ativo */
-.hamburger.active {
-    background: rgba(79, 209, 199, 0.2);
-    color: var(--azul-claro);
-    transform: rotate(90deg);
-}
-
-/* CORREÇÃO: Garantir que overlay cubra tudo */
-.overlay {
-    z-index: 1050;
-}
-
-.mobile-menu {
-    z-index: 1060;
-}
-
-.close-menu {
-    z-index: 1070;
+/* === ESTILOS PARA O BOTÃO FLUTUANTE (se necessário) === */
+.btn-flutuante {
+    z-index: 99990; /* Abaixo do banner-text mas acima do banner */
 }

@@ -1,14 +1,4 @@
-﻿/* home-products.js - L&A Pescados e Mariscos
- * OTIMIZADO PARA SEO, PERFORMANCE E ACESSIBILIDADE
- * Funcionalidades:
- * - Gerenciamento de produtos na página inicial
- * - Schema markup para produtos em destaque
- * - Integração consistente com carrinho
- * - Lazy loading de imagens
- * - Performance otimizada
- */
-
-(function() {
+﻿(function() {
     'use strict';
 
     // ==================== CONFIGURAÇÕES E CONSTANTES ====================
@@ -46,7 +36,6 @@
             }))
         };
 
-        // Remove schema existente e adiciona novo
         const existingSchema = document.querySelector('script[data-type="home-products-schema"]');
         if (existingSchema) existingSchema.remove();
 
@@ -69,14 +58,11 @@
     // ==================== UTILITÁRIOS DE PERFORMANCE ====================
     const utils = {
         formatCurrency: (n) => {
-            // Tenta usar a formatação do produtos.js, se não disponível, usa local
             if (window.produtosHelpers && window.produtosHelpers.utils) {
                 return window.produtosHelpers.utils.formatCurrency(n);
             }
             return Number(n).toLocaleString(CONFIG.LOCALE);
         },
-
-        // Lazy loading otimizado
         lazyLoadObserver: null,
         initLazyLoading: () => {
             if ('IntersectionObserver' in window) {
@@ -95,8 +81,6 @@
                 });
             }
         },
-
-        // Debounce para performance
         debounce: (func, wait) => {
             let timeout;
             return function executedFunction(...args) {
@@ -170,13 +154,11 @@
 
     // ==================== GERENCIAMENTO DO CARRINHO ====================
     const cartManager = {
-        // Tenta usar o cartManager do produtos.js, se não disponível, usa localStorage diretamente
         toggleProduct: (product) => {
             if (window.produtosHelpers && window.produtosHelpers.cartManager) {
                 return window.produtosHelpers.cartManager.toggleProduct(product);
             }
-            
-            // Fallback para localStorage direto
+
             const cart = JSON.parse(localStorage.getItem('cart')) || [];
             const existingIndex = cart.findIndex(item => item.sku === product.sku);
 
@@ -195,23 +177,18 @@
             }
 
             localStorage.setItem('cart', JSON.stringify(cart));
-            
-            // Dispara evento para atualizar outros componentes
             window.dispatchEvent(new CustomEvent('cartUpdated', { detail: cart }));
-            
-            // Atualiza badge do carrinho
             if (window.headerHelpers && window.headerHelpers.updateCartBadge) {
                 window.headerHelpers.updateCartBadge();
             }
 
             return cart;
         },
-
         isInCart: (sku) => {
             if (window.produtosHelpers && window.produtosHelpers.cartManager) {
                 return window.produtosHelpers.cartManager.isInCart(sku);
             }
-            
+
             const cart = JSON.parse(localStorage.getItem('cart')) || [];
             return cart.some(item => item.sku === sku);
         }
@@ -225,20 +202,17 @@
             homeProductsManager.checkInitialCartState();
             homeProductsManager.setupLazyLoadingForImages();
             generateHomeProductsSchema();
-
             console.log('✅ home-products.js inicializado com sucesso!');
         },
-
         setupEventListeners: () => {
             const addCartButtons = document.querySelectorAll('.product-card .add-cart');
-            
+
             addCartButtons.forEach(button => {
-                // Debounce para evitar múltiplos cliques rápidos
                 const debouncedClick = utils.debounce((e) => {
                     e.stopPropagation();
                     const productCard = e.target.closest('.product-card');
                     const sku = productCard.getAttribute('data-sku');
-                    
+
                     if (sku && homeProducts[sku]) {
                         homeProductsManager.handleAddToCart(homeProducts[sku], sku, button);
                     }
@@ -247,14 +221,11 @@
                 button.addEventListener('click', debouncedClick);
             });
 
-            // Event listener para atualizar estado dos botões quando carrinho muda
             window.addEventListener('cartUpdated', () => {
                 homeProductsManager.checkInitialCartState();
             });
         },
-
         handleAddToCart: (product, sku, button) => {
-            // Feedback visual imediato
             const originalHTML = button.innerHTML;
             button.innerHTML = '<i class="bx bx-loader-alt bx-spin"></i>';
             button.classList.add('adding');
@@ -268,7 +239,6 @@
                 button.classList.remove('adding');
                 button.disabled = false;
 
-                // Feedback visual
                 homeProductsManager.showFeedbackMessage(
                     nowInCart ? 
                     `${product.nome} adicionado ao carrinho` : 
@@ -277,7 +247,6 @@
                 );
             }, 300);
         },
-
         updateButtonState: (button, isInCart) => {
             if (isInCart) {
                 button.classList.add('added');
@@ -291,30 +260,27 @@
                 button.title = 'Adicionar ao carrinho';
             }
         },
-
         checkInitialCartState: () => {
             const productCards = document.querySelectorAll('.product-card');
-            
+
             productCards.forEach(card => {
                 const sku = card.getAttribute('data-sku');
                 const button = card.querySelector('.add-cart');
-                
+
                 if (sku && button) {
                     const inCart = cartManager.isInCart(sku);
                     homeProductsManager.updateButtonState(button, inCart);
                 }
             });
         },
-
         setupLazyLoadingForImages: () => {
             const productImages = document.querySelectorAll('.product-card img[data-src]');
-            
+
             if (utils.lazyLoadObserver) {
                 productImages.forEach(img => {
                     utils.lazyLoadObserver.observe(img);
                 });
             } else {
-                // Fallback: carrega todas as imagens imediatamente
                 productImages.forEach(img => {
                     img.src = img.dataset.src;
                     img.onerror = () => {
@@ -323,15 +289,12 @@
                 });
             }
         },
-
         showFeedbackMessage: (message, type = 'success') => {
-            // Tenta usar o sistema de feedback do produtos.js, se disponível
             if (window.produtosHelpers && window.produtosHelpers.productRenderer) {
                 window.produtosHelpers.productRenderer.showFeedbackMessage(message);
                 return;
             }
 
-            // Fallback: sistema de feedback básico
             const existingFeedback = document.querySelector('.home-feedback-message');
             if (existingFeedback) existingFeedback.remove();
 
@@ -341,16 +304,15 @@
             feedback.setAttribute('aria-live', 'polite');
             feedback.textContent = message;
 
-            // Estilos básicos para o feedback
             feedback.style.cssText = `
                 position: fixed;
-                top: 100px;
+                top: 80px; /* Ajustado para evitar sobreposição com header */
                 right: 20px;
                 background: ${type === 'success' ? '#22c55e' : '#3b82f6'};
                 color: white;
                 padding: 12px 20px;
                 border-radius: 8px;
-                z-index: 10000;
+                z-index: 9999; /* Abaixo do menu e carrinho */
                 font-weight: 600;
                 box-shadow: 0 4px 12px rgba(0,0,0,0.15);
             `;
@@ -363,8 +325,6 @@
                 }
             }, 3000);
         },
-
-        // Método para atualizar produtos dinamicamente (se necessário no futuro)
         updateFeaturedProducts: (newProducts) => {
             Object.assign(homeProducts, newProducts);
             generateHomeProductsSchema();
@@ -373,7 +333,6 @@
 
     // ==================== INICIALIZAÇÃO ====================
     const init = () => {
-        // Aguarda o DOM estar pronto
         if (document.readyState === 'loading') {
             document.addEventListener('DOMContentLoaded', homeProductsManager.init);
         } else {
@@ -391,5 +350,4 @@
 
     // ==================== INICIALIZAÇÃO AUTOMÁTICA ====================
     init();
-
 })();
