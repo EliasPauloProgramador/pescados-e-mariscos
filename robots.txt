@@ -1,31 +1,51 @@
-﻿User-agent: *
+﻿# ========================================
+# ROBOTS.TXT - pescados-e-mariscos.vercel.app
+# ========================================
+
+# Permitir todos os bots (padrão)
+User-agent: *
 Allow: /
 
-# URLs importantes para SEO
-Allow: /index.html
-Allow: /Assets/Links/produtos/produtos.html
-Allow: /Assets/Links/sobre/sobre.html
+# Permitir arquivos estáticos (imagens, CSS, JS, HTMLs internos)
+Allow: /Assets/
+Allow: /*.html
+Allow: /*.jpg
+Allow: /*.png
+Allow: /*.webp
+Allow: /*.css
+Allow: /*.js
 
-# Bloquear áreas sensíveis
+# Bloquear pastas sensíveis (mesmo que não existam, é boa prática)
 Disallow: /admin/
 Disallow: /tmp/
 Disallow: /backup/
 Disallow: /config/
 Disallow: /node_modules/
+Disallow: /cgi-bin/
+Disallow: /*.log$
+Disallow: /*.env
 
-# Sitemap com domínio correto do Vercel
+# Sitemap oficial
 Sitemap: https://pescados-e-mariscos.vercel.app/sitemap.xml
 
-# Otimização para Google
+
+# ========================================
+# CONFIGURAÇÕES ESPECÍFICAS DO GOOGLE
+# ========================================
+
 User-agent: Googlebot
 Allow: /
 Crawl-delay: 1
 
 User-agent: Googlebot-Image
-Allow: /Assets/Images/Produtos/
 Allow: /Assets/Images/
+Allow: /Assets/Images/Produtos/
 
-# Bloquear bots indesejados
+
+# ========================================
+# BLOQUEAR BOTS INDESEJADOS (economiza banda)
+# ========================================
+
 User-agent: AhrefsBot
 Disallow: /
 
@@ -35,5 +55,11 @@ Disallow: /
 User-agent: MJ12bot
 Disallow: /
 
-User-agent: DotBot
+User-agent: Dotbot
+Disallow: /
+
+User-agent: PetalBot
+Disallow: /
+
+User-agent: Barkrowler
 Disallow: /
