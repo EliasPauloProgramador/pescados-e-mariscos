@@ -1,13 +1,13 @@
 {
   "version": 2,
+  "public": true,
   "builds": [
-    {
-      "src": "*.html", 
-      "use": "@vercel/static"
-    },
-    {
-      "src": "Assets/**/*",
-      "use": "@vercel/static"
-    }
+    { "src": "*.html", "use": "@vercel/static" },
+    { "src": "robots.txt", "use": "@vercel/static" },
+    { "src": "sitemap.xml", "use": "@vercel/static" },
+    { "src": "Assets/**/*", "use": "@vercel/static" }
+  ],
+  "routes": [
+    { "src": "/(.*)", "dest": "/index.html" }
   ]
 }
